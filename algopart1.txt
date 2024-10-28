@@ -1,0 +1,285 @@
+
+//........................... max sumarray sum ............................
+
+#include<iostream>
+using namespace std;
+int main(){
+        int a[]={1,2,3,4,5};
+        for(int i=0;i<5;i++){
+            for(int j=i;j<5;j++){
+                for(int k=i;k<=j;k++){
+                    cout<<a[k];
+                }
+                cout<<" ";
+            }
+            cout<<endl;
+        }
+
+}
+
+//........................... max sumarray sum ...............................
+
+#include<iostream>
+#include<vector>
+using namespace std;
+int main(){
+       vector<int> a={7,2,4,4,2,6};
+       int b[100]={},m=0,max=-1,index;
+        for(int i=0;i<a.size();i++){
+            for(int j=i;j<a.size();j++){
+                for(int k=i;k<=j;k++){
+                    cout<<a[k];
+                
+                }
+                cout<<" ";
+            }
+            cout<<endl;
+        }
+ 
+            for(int i=0;i<a.size();i++){
+            for(int j=i;j<a.size();j++){
+                for(int k=i;k<=j;k++){
+                    b[m]=b[m]+a[k];
+                }
+                m++;
+            }
+            }
+            for(int n=0;n<15;n++){
+                cout<<b[n]<<" ";
+            }
+
+            for(int x=0;x<m;x++){
+                if(max<b[x]){
+                    max=b[x];
+                    index=x;
+
+                }
+            }
+            cout<<"\nthe max  subarray sum is "<<max<<" and there are present in b array and also there index is "<<index;
+
+} 
+
+//........................... max sumarray sum ..............................
+
+#include<iostream>
+using namespace std;
+int max(int a,int b){
+    int maximum;
+    a>b?maximum=a:maximum=b;
+    return maximum;
+}
+int main(){
+    int n=5;
+    int a[5]={1,2,3,4,5};
+    int maxSum=-1;
+    for(int i=0;i<n;i++){
+        int currSum=0;
+        for(int j=i;j<n;j++){
+            currSum=currSum+a[j];
+        maxSum=max(currSum,maxSum);
+    }
+    }
+    cout<<maxSum;
+
+}
+// ....................kadane's algorithm................
+
+#include<iostream>
+using namespace std;
+int max(int a,int b){
+    int maximum;
+    a>b?maximum=a:maximum=b;
+    return maximum;
+}
+int main(){
+    int n=5;
+    int a[5]={1,2,3,4,5};
+    int maxSum=-1;
+    for(int i=0;i<n;i++){
+        int currSum=0;
+        for(int j=i;j<n;j++){
+            currSum=currSum+a[j];
+        maxSum=max(currSum,maxSum);
+        if(currSum<0)
+        currSum=0;
+    }
+    }
+    cout<<maxSum;
+
+}
+
+//...............................pair sum(but not a proper ans)................................
+
+#include<iostream>
+using namespace std;
+int main(){
+    int a[]={3,4,2,6,9,3},target;
+    cout<<"enter the target ";
+    cin>>target;
+    for(int i=0;i<6;i++){
+        for(int j=i;j<6;j++){
+            if(i!=j){
+            if(a[i]>a[j]){
+                int temp=a[i];
+                a[i]=a[j];
+                a[j]=temp;
+            }
+        }
+ 
+        }
+    }
+
+    
+    for(int i=0;i<6;i++){
+        for(int j=i;j<6;j++){
+            if(i!=j){
+                if(a[i]+a[j]==target){
+                    cout<<a[i]<<a[j];
+                    break;
+                }
+            
+            }
+        }
+    } 
+}
+
+//..................................pair sum(proper ans but not optimized).....................................
+
+#include<iostream>
+#include<vector>
+using namespace std;
+void sort(int a[],int n){               // sort the element
+       for(int i=0;i<n;i++){
+        for(int j=i;j<n;j++){
+            if(i!=j){
+            if(a[i]>a[j]){
+                int temp=a[i];
+                a[i]=a[j];
+                a[j]=temp;
+            }
+        }
+ 
+        }
+    }
+}
+vector<int> ps(int a[],int n,int target){
+    vector<int>ans;
+    for(int i=0;i<6;i++){
+        for(int j=i+1;j<6;j++){
+                if(a[i]+a[j]==target){
+                    ans.push_back(a[i]);
+                    ans.push_back(a[j]);
+                    return ans;
+                }
+            
+            }
+    }
+}
+
+int main(){
+    int a[]={1,2,3,4,5,6},target;
+    cout<<"enter the target ";
+    cin>>target;
+    sort(a,6);
+     vector<int>ans=ps(a,6,target);
+     for(int val:ans)
+     cout<<val;
+    
+}
+
+
+//..................................pair sum(proper ans(fully optimized))...............
+
+#include<iostream>
+using namespace std;
+int main(){
+    int a[]={1,2,3,4,5},target;//it must be sorted
+    cout<<"enter the target";
+    cin>>target;
+    for(int i=0,j=4;i<j;){
+        int sum=a[i]+a[j];
+        if(sum>target)
+        j--;
+        else if(sum<target)
+        i++;
+        else{
+        cout<<a[i]<<a[j];
+        break;
+        }
+    }
+}
+
+
+//..................................find majority element(not optimized)..................
+
+#include<iostream>
+#include<vector>
+using namespace std;
+int main(){
+    vector<int> a={2,2,1,3,1,5,9};
+    int n=a.size(),c=1,m=0;
+    for(int i=0;i<n;i++){
+        for(int j=i+1;j<n;j++){
+            if(a[i]==a[j]){
+                c++;
+                m=a[i];
+                break;
+            }
+        }
+    }
+    if(c>n/2)
+    cout<<" majority element is "<<m;
+    else{
+        cout<<"majority element is not present";
+    }
+}
+
+//...................................find majority element (optimized but array is sorted)..................
+
+#include<iostream>
+#include<vector>
+using namespace std;
+int main(){
+    vector<int> a={1,1,1,2,2,2,2};   // it must be sorted
+    int n=a.size(),count=1,mj=a[0];
+    for(int i=1;i<n;i++){
+        if(a[i]==a[i-1]){
+            count++;
+        }
+        else{
+            count=1;
+            mj=a[i];
+
+        }
+    }
+    if(count>n/2){
+        cout<<"majority is element is :- "<<mj;
+    }
+    else{
+        cout<<"majority element is not present";
+    }
+
+
+}
+
+
+// .......moore's voting agorithm(but majority element  must be exist in the array if not exist the return last element of the array )......................
+
+#include<iostream>
+#include<vector>
+using namespace std;
+int main(){
+    vector<int> a={2,2,1,1,1,2,2};
+    int n=a.size(),count=0,mj=0;
+    for(int i=0;i<n;i++){
+        if(count==0){
+            mj=a[i];
+        }
+        if(a[i]==mj){
+            count++;
+        }
+        else
+        count--;
+    }
+
+}
